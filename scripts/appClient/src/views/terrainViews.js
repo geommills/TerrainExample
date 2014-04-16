@@ -72,7 +72,7 @@
         geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 50, 0 ) );
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
         helper = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
-        scene.add( helper );
+        //scene.add( helper );
 
         renderer = new THREE.WebGLRenderer();
         renderer.setClearColor( 0xbfd1e5 );
