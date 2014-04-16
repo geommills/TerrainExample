@@ -76,7 +76,7 @@
 
         renderer = new THREE.WebGLRenderer();
         renderer.setClearColor( 0xbfd1e5 );
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( window.innerWidth - 6, window.innerHeight - 50);
 
         container.innerHTML = "";
 
@@ -99,9 +99,9 @@
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
 
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( window.innerWidth - 5, window.innerHeight - 50 );
 
-        controls.handleResize();
+        //controls.handleResize();
 
       }
 

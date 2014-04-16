@@ -1,6 +1,6 @@
 ﻿MainApplication.Templates = MainApplication.Templates || {};
 MainApplication.Templates.TerrainTemplate = [
-    "<div id='terrain'></div>",
+    "<div id='terrain'></div>"
 ].join("\n");
 
 
