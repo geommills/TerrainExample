@@ -81,12 +81,12 @@
         container.innerHTML = "";
 
         container.appendChild( renderer.domElement );
-        container.addEventListener( 'mousemove', onMouseMove, false );
+        //container.addEventListener( 'mousemove', onMouseMove, false );
 
         stats = new Stats();
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
-        container.appendChild( stats.domElement );
+        //container.appendChild( stats.domElement );
 
         //
 
