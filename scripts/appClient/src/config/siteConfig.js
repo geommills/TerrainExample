@@ -80,7 +80,7 @@ Backbone.Marionette.TemplateCache.prototype.compileTemplate = function (rawTempl
  
 
 ////////////////////Application Details//////////////////////////
-MainApplication.LandingPage = "Map";
+MainApplication.LandingPage = "Terrain";
 MainApplication.hostURL = window.location.protocol + "//" + window.location.host;
 //MainApplication.hostURL = "http://smboilerplate-env.elasticbeanstalk.com";
 //path ID 1 is our libraries we bring into the app (as opposed to getting them with bower, this can be for shims, fixes, overrides, whatever, the rest of the paths are arbitrary, and as such as completely flexible, that being said, we store our files in source)
@@ -156,5 +156,21 @@ MainApplication.ConfigFiles = {
             { "view": "workflowViews.js" },
         ],
         "initializers": "initWorkflow.js"
+    },
+    "Terrain": {
+        "Id": 8,
+        "sectionName": "Terrain Example",
+        "containerClass": "",
+        "hashPath": "Terrain",
+        "models": [
+            { "model" : "terrainModels.js" }
+        ],
+        "templates": [
+            { "template": "terrainTemplates.js" }
+        ],
+        "views": [
+            { "view": "terrainViews.js" },
+        ],
+        "initializers": "initTerrain.js"
     }
 };  
