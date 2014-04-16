@@ -34,6 +34,7 @@
 	"bootstrap-datepicker": "*",
 	"requirejs": "*",
 	"ydn-db": "*",
-	"d3": "*"
+	"d3": "*",
+  "threejs": "*"
   }
 }
