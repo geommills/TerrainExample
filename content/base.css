@@ -1333,18 +1333,9 @@ Custom config styles
 }
 
 #terrain {
-    position: absolute;
     left: 0px;
     top: 0px;
-    bottom: 50px; /* forget height, use this */
-    /*height: 100%;*/
-    width: 100%;
-    background-image: -moz-linear-gradient(top, #8899bb, #888888);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8899bb), to(#888888));
-    background-image: -webkit-linear-gradient(top, #8899bb, #888888);
-    background-image: -o-linear-gradient(top, #8899bb, #888888);
-    background-image: linear-gradient(to bottom, #8899bb, #888888);
-    font-size: 10px;
+    margin-left: -80px;
 }
 
 #workflow {
