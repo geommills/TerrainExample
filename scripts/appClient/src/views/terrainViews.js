@@ -16,6 +16,7 @@
       var container, stats;
       var camera, controls, scene, renderer;
       var mesh, texture;
+      var verticalExaggeration = 1.5;
 
       console.log(this.terrain.attributes.width);
       console.log(this.terrain.attributes.height);
@@ -62,7 +63,7 @@
         geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( - Math.PI  ) );
 
         for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
-          geometry.vertices[ i ].y = (terrainVerties[ i ].z - terrainMin) * 3;
+          geometry.vertices[ i ].y = (terrainVerties[ i ].z - terrainMin) * verticalExaggeration;
           for ( var j = 0; j < geometry2.vertices.length; j ++ ) {
             if(geometry.vertices[ i ].x == geometry2.vertices[ j ].x && geometry.vertices[ i ].z == geometry2.vertices[ j ].z)
               geometry2.vertices[ j ].y = geometry.vertices[ i ].y;
