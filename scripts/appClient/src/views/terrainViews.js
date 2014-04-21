@@ -54,8 +54,6 @@
         camera.position.y =  controls.center.y + 2000;
         camera.position.x = 2000;
 
-
-
         var geometry = new THREE.PlaneGeometry( terrainWidth, terrainHeight, xdiff, ydiff);
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
         //var data = [];
@@ -71,18 +69,6 @@
           }
         }
 
-
-
-
-       /* var count = 0;
-        for ( var j = geometry2.vertices.length-1; j >= 0; j -- ) {
-          geometry2.vertices[ count ].y  = (terrainVerties[ j ].z - terrainMin) * 3;
-          count += 1;
-        }*/
-
-
-        console.log(geometry);
-        console.log(geometry2);
         // PLEASE NOTE!! With raycasting faces must be planar!  PlaneGeometry is made up of
         // quads and now that we have changed the height value of the verts, the quads are no
         // longer planar.  We must break it down into triangles in order to preserve this information.
@@ -124,8 +110,8 @@
         //container.appendChild( stats.domElement );
 
         
-      var ambientLight = new THREE.AmbientLight(0xbbbbbb);
-      scene.add(ambientLight);
+        var ambientLight = new THREE.AmbientLight(0xbbbbbb);
+        scene.add(ambientLight);
 
         window.addEventListener( 'resize', onWindowResize, false );
 
