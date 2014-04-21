@@ -61,20 +61,24 @@
         //var data = [];
         var geometry2 = new THREE.PlaneGeometry( terrainWidth, terrainHeight, xdiff, ydiff);
         geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
-        geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( + Math.PI ) );
+        geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( - Math.PI  ) );
 
         for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
-
           geometry.vertices[ i ].y = (terrainVerties[ i ].z - terrainMin) * 3;
-          geometry2.vertices[ i ].y = (terrainVerties[ i ].z - terrainMin) * 3;
-          //data.push(terrainVerties[ i ].z);
+          for ( var j = 0; j < geometry2.vertices.length; j ++ ) {
+            if(geometry.vertices[ i ].x == geometry2.vertices[ j ].x && geometry.vertices[ i ].z == geometry2.vertices[ j ].z)
+              geometry2.vertices[ j ].y = geometry.vertices[ i ].y;
+          }
+        }
 
-        }
-        var count = 0;
+
+
+
+       /* var count = 0;
         for ( var j = geometry2.vertices.length-1; j >= 0; j -- ) {
-          //geometry2.vertices[ count ].y  = (terrainVerties[ j ].z - terrainMin) * 3;
+          geometry2.vertices[ count ].y  = (terrainVerties[ j ].z - terrainMin) * 3;
           count += 1;
-        }
+        }*/
 
 
         console.log(geometry);
