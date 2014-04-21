@@ -68,7 +68,7 @@
 
         for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
 
-          geometry.vertices[ i ].y = (terrainVerties[ i ].z) * 1.5;
+          geometry.vertices[ i ].y = (terrainVerties[ i ].z - terrainMin) * 3;
           //data.push(terrainVerties[ i ].z);
 
         }
@@ -81,8 +81,13 @@
 
         texture = new THREE.Texture( generateTexture( data, worldWidth, worldDepth ), new THREE.UVMapping(), THREE.ClampToEdgeWrapping, THREE.ClampToEdgeWrapping );
         texture.needsUpdate = true;
+        var material = new THREE.MeshLambertMaterial({
+          map: THREE.ImageUtils.loadTexture('http://localhost:1337/projects/SurfaceTest/surface.jpg')
+        });
+        mesh = new THREE.Mesh( geometry, material );
 
-        mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { map: texture } ) );
+        //mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { map: texture } ) );
+        
         scene.add( mesh );
 
         var geometry = new THREE.CylinderGeometry( 0, 20, 100, 3 );
@@ -90,8 +95,10 @@
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
 
 
-        helper = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
+        //helper = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
         //scene.add( helper );
+
+
 
         renderer = new THREE.WebGLRenderer();
         renderer.setClearColor( 0xbfd1e5 );
@@ -107,7 +114,9 @@
         stats.domElement.style.top = '0px';
         //container.appendChild( stats.domElement );
 
-        //
+        
+      var ambientLight = new THREE.AmbientLight(0xbbbbbb);
+      scene.add(ambientLight);
 
         window.addEventListener( 'resize', onWindowResize, false );
 

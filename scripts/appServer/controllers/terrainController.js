@@ -4,7 +4,7 @@ var fs = require("fs");
 
 exports.get = function(req, res, next){
     
-	fs.readFile('./projects/I-5 Surface Test/I-5_SurfaceTest.xyz', 'utf8', function (err,data) {
+	fs.readFile('./projects/SurfaceTest/I-5_SurfaceTest.xyz', 'utf8', function (err,data) {
 	  	if (err) {
 	    	console.log(err);
 	    	res.send(err);
