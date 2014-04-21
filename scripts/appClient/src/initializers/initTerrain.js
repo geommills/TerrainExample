@@ -3,28 +3,23 @@ MainApplication.pageInitializer[this_page_name] = MainApplication.module(this_pa
     this.startWithParent = false;
 });
 MainApplication.pageInitializer[this_page_name].on("start", function (options) {
-	//MainApplication.models.WorkflowJobCollection = new WorkflowJobCollection();	
-	MainApplication.views.TerrainView = new TerrainView({});
-	MainApplication.mainRegion.show(MainApplication.views.TerrainView);
-	/*MainApplication.models.WorkflowJobCollection.fetch({
-			
-			data: { JobIdentifier: '15f4afb0-f309-4ed8-bbaf-5da78fa8de6e'},
+	MainApplication.models.TerrainCollection = new TerrainCollection();	
+	MainApplication.models.TerrainCollection.fetch({
 			success: function(){
-    		MainApplication.views.WorkflowView = new WorkflowView({
-    			workflowJobCollection: MainApplication.models.WorkflowJobCollection
-    		});
-    		MainApplication.mainRegion.show(MainApplication.views.WorkflowView);
+				MainApplication.views.TerrainView = new TerrainView({				
+	    			terrainCollection: MainApplication.models.TerrainCollection
+				});
+	    		MainApplication.mainRegion.show(MainApplication.views.TerrainView);
 				$('#loadingDiv').css('display',"none");
 				return false;
 			},
 			error: function(e){
-				console.log("Error retrieving workflows");
+				console.log("Error retrieving terrain");
 				console.log(e);
 				$('#loadingDiv').css('display',"none");
 				return false;
 			}
-		});
-*/
+	});
 	MainApplication.views.terrainFooterView = new TerrainFooterView({});
 	MainApplication.footerRegion.show(MainApplication.views.terrainFooterView);	
 });

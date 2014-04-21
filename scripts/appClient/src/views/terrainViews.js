@@ -3,21 +3,22 @@
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.TerrainTemplate);
     },
     initialize: function (options) {
+      this.terrain = options.terrainCollection.models[0];
     },
     onShow: function()
     {
-        if ( ! Detector.webgl ) {
-
+      console.log(this.terrain.attributes);
+      if ( ! Detector.webgl ) {
         Detector.addGetWebGLMessage();
         document.getElementById( 'terrain' ).innerHTML = "";
-
       }
 
       var container, stats;
-
       var camera, controls, scene, renderer;
-
       var mesh, texture;
+
+      console.log(this.terrain.attributes.width);
+      console.log(this.terrain.attributes.height);
 
       var worldWidth = 256, worldDepth = 256,
       worldHalfWidth = worldWidth / 2, worldHalfDepth = worldDepth / 2;
@@ -26,7 +27,12 @@
 
       var shouldSphereFollowMouse = true;
       var helper;
-
+      var terrainWidth = this.terrain.attributes.width;
+      var terrainHeight = this.terrain.attributes.height;
+      var terrainVerties = this.terrain.attributes.vertices;
+      var terrainMin = this.terrain.attributes.minz;
+      var xdiff = this.terrain.attributes.xdiff;
+      var ydiff = this.terrain.attributes.ydiff;
       init();
       animate();
 
@@ -44,19 +50,30 @@
 
         data = generateHeight( worldWidth, worldDepth );
 
-        controls.center.y = data[ worldHalfWidth + worldHalfDepth * worldWidth ] + 500;
+        controls.center.y =  500;
         camera.position.y =  controls.center.y + 2000;
         camera.position.x = 2000;
 
-        var geometry = new THREE.PlaneGeometry( 7500, 7500, worldWidth - 1, worldDepth - 1 );
+
+
+        var geometry = new THREE.PlaneGeometry( terrainWidth, terrainHeight, xdiff, ydiff);
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+
+
+        console.log(geometry.vertices.length);
+        console.log(terrainVerties.length);
+
+
+        //var data = [];
 
         for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
 
-          geometry.vertices[ i ].y = data[ i ] * 10;
+          geometry.vertices[ i ].y = (terrainVerties[ i ].z) * 1.5;
+          //data.push(terrainVerties[ i ].z);
 
         }
 
+        console.log(geometry);
         // PLEASE NOTE!! With raycasting faces must be planar!  PlaneGeometry is made up of
         // quads and now that we have changed the height value of the verts, the quads are no
         // longer planar.  We must break it down into triangles in order to preserve this information.
@@ -71,6 +88,8 @@
         var geometry = new THREE.CylinderGeometry( 0, 20, 100, 3 );
         geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 50, 0 ) );
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+
+
         helper = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
         //scene.add( helper );
 
