@@ -58,22 +58,27 @@
 
         var geometry = new THREE.PlaneGeometry( terrainWidth, terrainHeight, xdiff, ydiff);
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
-
-
-        console.log(geometry.vertices.length);
-        console.log(terrainVerties.length);
-
-
         //var data = [];
+        var geometry2 = new THREE.PlaneGeometry( terrainWidth, terrainHeight, xdiff, ydiff);
+        geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+        geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( + Math.PI ) );
 
         for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
 
           geometry.vertices[ i ].y = (terrainVerties[ i ].z - terrainMin) * 3;
+          geometry2.vertices[ i ].y = (terrainVerties[ i ].z - terrainMin) * 3;
           //data.push(terrainVerties[ i ].z);
 
         }
+        var count = 0;
+        for ( var j = geometry2.vertices.length-1; j >= 0; j -- ) {
+          //geometry2.vertices[ count ].y  = (terrainVerties[ j ].z - terrainMin) * 3;
+          count += 1;
+        }
+
 
         console.log(geometry);
+        console.log(geometry2);
         // PLEASE NOTE!! With raycasting faces must be planar!  PlaneGeometry is made up of
         // quads and now that we have changed the height value of the verts, the quads are no
         // longer planar.  We must break it down into triangles in order to preserve this information.
@@ -85,10 +90,10 @@
           map: THREE.ImageUtils.loadTexture('http://localhost:1337/projects/SurfaceTest/surface.jpg')
         });
         mesh = new THREE.Mesh( geometry, material );
-
-        //mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { map: texture } ) );
+        var mesh2 = new THREE.Mesh( geometry2, new THREE.MeshBasicMaterial( { map: texture } ) );
         
         scene.add( mesh );
+        scene.add( mesh2 );
 
         var geometry = new THREE.CylinderGeometry( 0, 20, 100, 3 );
         geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 50, 0 ) );
