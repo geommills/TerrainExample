@@ -96,6 +96,21 @@
 
 
 
+        var material = new THREE.LineBasicMaterial({
+          color: 0x444444,
+          linewidth: 30
+        });
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push( new THREE.Vector3( -(terrainWidth / 2) + 307, -(terrainHeight / 2 ) + 19, terrainMin-599.828));
+        geometry.vertices.push( new THREE.Vector3( 0, 0 , -100) );
+        geometry.vertices.push( new THREE.Vector3( terrainWidth/ 2, terrainHeight / 2, 0) );
+        geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+
+        var line = new THREE.Line( geometry, material );
+        scene.add( line );
+
+
+
         renderer = new THREE.WebGLRenderer();
         renderer.setClearColor( 0xbfd1e5 );
         renderer.setSize( window.innerWidth - 6, window.innerHeight - 50);
@@ -113,6 +128,10 @@
         
         var ambientLight = new THREE.AmbientLight(0xbbbbbb);
         scene.add(ambientLight);
+
+
+        
+
 
         window.addEventListener( 'resize', onWindowResize, false );
 
