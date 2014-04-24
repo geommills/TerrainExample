@@ -32,10 +32,11 @@
       var terrainHeight = this.terrain.attributes.height;
       var terrainVertices = this.terrain.attributes.vertices;
       var terrainMin = this.terrain.attributes.minz;
-      var offsetWidth = terrainWidth / 2 + 1;
-      var offsetHeight = terrainHeight / 2 + 1;
+      var offsetWidth = terrainWidth / 2;
+      var offsetHeight = terrainHeight / 2;
       var xdiff = this.terrain.attributes.xdiff;
       var ydiff = this.terrain.attributes.ydiff;
+      var terrainExaggeration = .5;
       init();
       animate();
 
@@ -57,17 +58,37 @@
         camera.position.y =  controls.center.y + 2000;
         camera.position.x = 2000;
 
-        var geometry = new THREE.PlaneGeometry( terrainWidth, terrainHeight, xdiff, ydiff);
+        var geometry = new THREE.PlaneGeometry( terrainWidth, terrainHeight, (terrainWidth/ xdiff), (terrainHeight / ydiff));
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
         //var data = [];
-        var geometry2 = new THREE.PlaneGeometry( terrainWidth, terrainHeight, xdiff, ydiff);
+        var geometry2 = new THREE.PlaneGeometry( terrainWidth, terrainHeight, (terrainWidth/ xdiff), (terrainHeight / ydiff));
         geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
         geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( - Math.PI  ) );
 
+        console.log(offsetWidth);
+        console.log(offsetHeight);
+
+            console.log(geometry.vertices[ 0 ].x + offsetWidth);
+            console.log(geometry.vertices[ 0 ].z + offsetHeight);
+
+
+console.log(geometry.vertices);
+
+        //Apply the vertical values
+        for ( var i = 0, l = terrainVertices.length; i < l; i ++ ) {
+          for ( var j = 0; j < geometry.vertices.length; j ++ ) {
+            if(terrainVertices[ i ].x ==((geometry.vertices[ j ].x + offsetWidth)+1) && terrainVertices[ i ].y == ((geometry.vertices[ j ].z + offsetHeight)+1) )
+              geometry.vertices[ j ].y = (terrainVertices[ i ].z - terrainMin) * terrainExaggeration;
+          }
+        }
+
+
+
+
+
         for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
-          geometry.vertices[ i ].y = (terrainVertices[ i ].z - terrainMin) * verticalExaggeration;
           for ( var j = 0; j < geometry2.vertices.length; j ++ ) {
-            if(geometry.vertices[ i ].x == geometry2.vertices[ j ].x && geometry.vertices[ i ].z == geometry2.vertices[ j ].z)
+            if(geometry.vertices[ i ].x == geometry2.vertices[ j ].x  && geometry.vertices[ i ].z == geometry2.vertices[ j ].z)
               geometry2.vertices[ j ].y = geometry.vertices[ i ].y;
           }
         }
