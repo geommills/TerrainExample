@@ -54,7 +54,7 @@
 
         data = generateHeight( worldWidth, worldDepth );
 
-        controls.center.y =  500;
+        controls.center.y = data[ worldHalfWidth + worldHalfDepth * worldWidth ] + 500;
         camera.position.y =  controls.center.y + 2000;
         camera.position.x = 2000;
 
@@ -94,8 +94,8 @@
         // PLEASE NOTE!! With raycasting faces must be planar!  PlaneGeometry is made up of
         // quads and now that we have changed the height value of the verts, the quads are no
         // longer planar.  We must break it down into triangles in order to preserve this information.
-        THREE.GeometryUtils.triangulateQuads(geometry);
-
+        geometry.computeFaceNormals();
+        geometry2.computeFaceNormals();
         texture = new THREE.Texture( generateTexture( data, worldWidth, worldDepth ), new THREE.UVMapping(), THREE.ClampToEdgeWrapping, THREE.ClampToEdgeWrapping );
         texture.needsUpdate = true;
         var material = new THREE.MeshLambertMaterial({
