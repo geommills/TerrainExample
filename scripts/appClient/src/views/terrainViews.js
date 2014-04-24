@@ -36,7 +36,7 @@
       var offsetHeight = terrainHeight / 2;
       var xdiff = this.terrain.attributes.xdiff;
       var ydiff = this.terrain.attributes.ydiff;
-      var terrainExaggeration = .5;
+      var terrainExaggeration = 1;
       init();
       animate();
 
@@ -72,12 +72,10 @@
             console.log(geometry.vertices[ 0 ].z + offsetHeight);
 
 
-console.log(geometry.vertices);
-
         //Apply the vertical values
         for ( var i = 0, l = terrainVertices.length; i < l; i ++ ) {
           for ( var j = 0; j < geometry.vertices.length; j ++ ) {
-            if(terrainVertices[ i ].x ==((geometry.vertices[ j ].x + offsetWidth)+1) && terrainVertices[ i ].y == ((geometry.vertices[ j ].z + offsetHeight)+1) )
+            if(terrainVertices[ i ].x ==((geometry.vertices[ j ].x + offsetWidth)+1) && terrainVertices[ i ].y  == ((geometry.vertices[ j ].z * -1) + offsetHeight +1) )
               geometry.vertices[ j ].y = (terrainVertices[ i ].z - terrainMin) * terrainExaggeration;
           }
         }
