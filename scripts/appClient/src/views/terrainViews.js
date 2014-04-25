@@ -4,10 +4,11 @@
     },
     initialize: function (options) {
       this.terrain = options.terrainCollection.models[0];
+      this.pipe = options.pipeCollection.models[0];
     },
     onShow: function()
     {
-      console.log(this.terrain.attributes);
+      console.log(this.pipe.attributes);
       if ( ! Detector.webgl ) {
         Detector.addGetWebGLMessage();
         document.getElementById( 'terrain' ).innerHTML = "";
@@ -31,11 +32,14 @@
       var terrainWidth = this.terrain.attributes.width;
       var terrainHeight = this.terrain.attributes.height;
       var terrainVertices = this.terrain.attributes.vertices;
+      var pipeVertices = this.pipe.attributes.vertices;
       var terrainMin = this.terrain.attributes.minz;
       var offsetWidth = terrainWidth / 2;
       var offsetHeight = terrainHeight / 2;
       var xdiff = this.terrain.attributes.xdiff;
       var ydiff = this.terrain.attributes.ydiff;
+      var firstX = this.terrain.attributes.minx;
+      var firstY = this.terrain.attributes.miny;
       var terrainExaggeration = 1;
       init();
       animate();
@@ -118,13 +122,15 @@
 
 
         var material = new THREE.LineBasicMaterial({
-          color: 0x444444,
-          linewidth: 30
+          color: 0x444499,
+          linewidth: 100
         });
         var geometry = new THREE.Geometry();
-        geometry.vertices.push( new THREE.Vector3( -(terrainWidth / 2) + 307, -(terrainHeight / 2 ) + 19, terrainMin-599.828));
-        geometry.vertices.push( new THREE.Vector3( 0, 0 , -100) );
-        geometry.vertices.push( new THREE.Vector3( terrainWidth/ 2, terrainHeight / 2, 0) );
+
+
+        for ( var i = 0, l = pipeVertices.length; i < l; i ++ ) {  
+          geometry.vertices.push( new THREE.Vector3( pipeVertices[i].x - firstX + 1 - offsetWidth, pipeVertices[i].y - firstY + 1 - offsetHeight,  pipeVertices[i].z - terrainMin) );
+        }
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 
         var line = new THREE.Line( geometry, material );

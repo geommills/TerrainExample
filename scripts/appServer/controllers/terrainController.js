@@ -1,14 +1,17 @@
 var http = require("http");
 var request = require('request');
 var fs = require("fs");
-
+var data = [];
 exports.get = function(req, res, next){
     
-	fs.readFile('./projects/SurfaceTest/I-5_SurfaceTest.xyz', 'utf8', function (err,data) {
+	fs.readFile('./projects/SurfaceTest/I-5_SurfaceTest.xyz', 'utf8', function (err,dataset) {
 	  	if (err) {
 	    	console.log(err);
 	    	res.send(err);
 	  	}
+	  	data = dataset;
+	  	
+	  	console.log(data);
 	  	var remaining = '';
 	  	remaining += data;
 		var index = remaining.indexOf('\n');
@@ -54,8 +57,8 @@ exports.get = function(req, res, next){
 	      		minHeight = parseFloat(splitData[2].replace('\r', ''));
 	      	}
 
-	      	var data = {x: parseFloat(splitData[0]) - firstX + 1, y: parseFloat(splitData[1]) - firstY + 1, z: parseFloat(splitData[2].replace('\r', ''))};
-	      	vertices.push(data);
+	      	var vert = {x: parseFloat(splitData[0]) - firstX + 1, y: parseFloat(splitData[1]) - firstY + 1, z: parseFloat(splitData[2].replace('\r', ''))};
+	      	vertices.push(vert);
 	  	  }
 	  	  else
 	  	  {
@@ -67,9 +70,10 @@ exports.get = function(req, res, next){
 	    height = lastY - firstY;
 
 
+
 	    console.log(width);
 	    console.log(height);
-	    var dataset = {rows: rowcount, width: width, height: height, xdiff: xdiff, ydiff: ydiff, minz: minHeight, vertices: vertices};
+	    var dataset = {rows: rowcount, width: width, height: height, xdiff: xdiff, ydiff: ydiff, minx: firstX, miny: firstY, minz: minHeight, vertices: vertices};
 	    //console.log(dataset);
 	  	res.send(dataset);
 	});
@@ -77,5 +81,29 @@ exports.get = function(req, res, next){
 
 };
 
+
+exports.getpipe = function(req, res, next){
+	fs.readFile('./projects/SurfaceTest/DrillProfile.txt', 'utf8', function (err2,drilldata) {
+	  	if (err2) {
+	    	console.log(err2);
+	    	res.send(err2);
+	  	}
+	  	var remainingdrill = '';
+	  	remainingdrill += drilldata;
+		var drillvertices = [];
+		var index = remainingdrill.indexOf('\n');
+		while (index > -1) {
+		    var line = remainingdrill.substring(0, index);
+		    remainingdrill = remainingdrill.substring(index + 1);
+		    index = remainingdrill.indexOf('\n');
+		    var splitData = line.split(',');
+			var data = {x: parseFloat(splitData[0]), y: parseFloat(splitData[1]), z: parseFloat(splitData[2].replace('\r', ''))};
+	      	drillvertices.push(data);
+		}
+		var dataset = {vertices: drillvertices};
+	    //console.log(dataset);
+	  	res.send(dataset);
+	 });
+};
 
 

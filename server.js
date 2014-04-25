@@ -14,6 +14,7 @@ server.use(restify.fullResponse());
 
 //Define Endpoints for Site and CRUD functionality
 server.get('/terrain3d', terrainController.get);
+server.get('/pipe3d', terrainController.getpipe);
 server.get('/.*', siteController.loadsite);
 
 var port = process.env.PORT || 1337;

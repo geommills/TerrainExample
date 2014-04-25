@@ -4,14 +4,26 @@ MainApplication.pageInitializer[this_page_name] = MainApplication.module(this_pa
 });
 MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 	MainApplication.models.TerrainCollection = new TerrainCollection();	
+	MainApplication.models.PipeCollection = new PipeCollection();	
 	MainApplication.models.TerrainCollection.fetch({
 			success: function(){
-				MainApplication.views.TerrainView = new TerrainView({				
-	    			terrainCollection: MainApplication.models.TerrainCollection
+				MainApplication.models.PipeCollection.fetch({
+					success: function(){
+						MainApplication.views.TerrainView = new TerrainView({				
+			    			terrainCollection: MainApplication.models.TerrainCollection,	
+			    			pipeCollection: MainApplication.models.PipeCollection
+						});
+			    		MainApplication.mainRegion.show(MainApplication.views.TerrainView);
+						$('#loadingDiv').css('display',"none");
+						return false;
+					},
+					error: function(e){
+						console.log("Error retrieving terrain");
+						console.log(e);
+						$('#loadingDiv').css('display',"none");
+						return false;
+					}
 				});
-	    		MainApplication.mainRegion.show(MainApplication.views.TerrainView);
-				$('#loadingDiv').css('display',"none");
-				return false;
 			},
 			error: function(e){
 				console.log("Error retrieving terrain");
