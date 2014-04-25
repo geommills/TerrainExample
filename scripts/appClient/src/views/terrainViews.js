@@ -69,12 +69,6 @@
         geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
         geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( - Math.PI  ) );
 
-        console.log(offsetWidth);
-        console.log(offsetHeight);
-
-            console.log(geometry.vertices[ 0 ].x + offsetWidth);
-            console.log(geometry.vertices[ 0 ].z + offsetHeight);
-
 
         //Apply the vertical values
         for ( var i = 0, l = terrainVertices.length; i < l; i ++ ) {
@@ -83,10 +77,6 @@
               geometry.vertices[ j ].y = (terrainVertices[ i ].z - terrainMin) * terrainExaggeration;
           }
         }
-
-
-
-
 
         for ( var i = 0, l = geometry.vertices.length; i < l; i ++ ) {
           for ( var j = 0; j < geometry2.vertices.length; j ++ ) {
@@ -116,15 +106,9 @@
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
 
 
-        //helper = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
-        //scene.add( helper );
-
-
-
         var linematerial = new THREE.LineBasicMaterial( { color: 0x444488, opacity: 1, linewidth: 5, vertexColors: THREE.VertexColors });
+        
         var geometry = new THREE.Geometry();
-
-
         for ( var i = 0, l = pipeVertices.length; i < l; i ++ ) {  
           geometry.vertices.push( new THREE.Vector3( pipeVertices[i].x - firstX + 1 - offsetWidth, pipeVertices[i].y - firstY + 1 - offsetHeight,  pipeVertices[i].z - terrainMin) );
         }
@@ -152,10 +136,6 @@
         
         var ambientLight = new THREE.AmbientLight(0xbbbbbb);
         scene.add(ambientLight);
-
-
-        
-
 
         window.addEventListener( 'resize', onWindowResize, false );
 

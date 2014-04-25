@@ -68,9 +68,7 @@ exports.get = function(req, res, next){
 	    }
 	    width = lastX - firstX;
 	    height = lastY - firstY;
-
-
-
+	    
 	    console.log(width);
 	    console.log(height);
 	    var dataset = {rows: rowcount, width: width, height: height, xdiff: xdiff, ydiff: ydiff, minx: firstX, miny: firstY, minz: minHeight, vertices: vertices};
