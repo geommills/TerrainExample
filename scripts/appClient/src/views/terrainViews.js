@@ -121,10 +121,7 @@
 
 
 
-        var material = new THREE.LineBasicMaterial({
-          color: 0x444499,
-          linewidth: 100
-        });
+        var linematerial = new THREE.LineBasicMaterial( { color: 0x444488, opacity: 1, linewidth: 10, vertexColors: THREE.VertexColors });
         var geometry = new THREE.Geometry();
 
 
@@ -133,7 +130,7 @@
         }
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 
-        var line = new THREE.Line( geometry, material );
+        var line = new THREE.Line( geometry, linematerial );
         scene.add( line );
 
 
