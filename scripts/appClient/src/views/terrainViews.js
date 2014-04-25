@@ -121,7 +121,7 @@
 
 
 
-        var linematerial = new THREE.LineBasicMaterial( { color: 0x444488, opacity: 1, linewidth: 10, vertexColors: THREE.VertexColors });
+        var linematerial = new THREE.LineBasicMaterial( { color: 0x444488, opacity: 1, linewidth: 5, vertexColors: THREE.VertexColors });
         var geometry = new THREE.Geometry();
 
 
