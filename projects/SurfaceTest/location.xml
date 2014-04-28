@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<dataroot>
+<LOCATION>
+<PointID>B-01</PointID>
+<elev_datum_code></elev_datum_code>
+<elev_collect_method_code></elev_collect_method_code>
+<horz_datum_code>NAD83 (feet)</horz_datum_code>
+<coord_type_code></coord_type_code>
+<coord_region_code></coord_region_code>
+<coord_zone_code></coord_zone_code>
+<horz_collect_method_code></horz_collect_method_code>
+<Station></Station>
+<Centerline_Offset></Centerline_Offset>
+<Offset_Direction></Offset_Direction>
+<Latitude><![CDATA[29° 40' 41.3" N]]></Latitude>
+<Longitude><![CDATA[91° 11' 43.1" W]]></Longitude>
+</LOCATION>
+<LOCATION>
+<PointID>B-02</PointID>
+<elev_datum_code></elev_datum_code>
+<elev_collect_method_code></elev_collect_method_code>
+<horz_datum_code>NAD83 (feet)</horz_datum_code>
+<coord_type_code></coord_type_code>
+<coord_region_code></coord_region_code>
+<coord_zone_code></coord_zone_code>
+<horz_collect_method_code></horz_collect_method_code>
+<Station></Station>
+<Centerline_Offset></Centerline_Offset>
+<Offset_Direction></Offset_Direction>
+<Latitude><![CDATA[29° 40' 47.7" N]]></Latitude>
+<Longitude><![CDATA[91° 11' 41.6" W]]></Longitude>
+</LOCATION>
+<LOCATION>
+<PointID>B-03</PointID>
+<elev_datum_code></elev_datum_code>
+<elev_collect_method_code></elev_collect_method_code>
+<horz_datum_code>NAD83 (feet)</horz_datum_code>
+<coord_type_code></coord_type_code>
+<coord_region_code></coord_region_code>
+<coord_zone_code></coord_zone_code>
+<horz_collect_method_code></horz_collect_method_code>
+<Station></Station>
+<Centerline_Offset></Centerline_Offset>
+<Offset_Direction></Offset_Direction>
+<Latitude><![CDATA[29° 40' 57.0" N]]></Latitude>
+<Longitude><![CDATA[91° 11' 40.0" W]]></Longitude>
+</LOCATION>
+<LOCATION>
+<PointID>B-04</PointID>
+<elev_datum_code></elev_datum_code>
+<elev_collect_method_code></elev_collect_method_code>
+<horz_datum_code>NAD83 (feet)</horz_datum_code>
+<coord_type_code></coord_type_code>
+<coord_region_code></coord_region_code>
+<coord_zone_code></coord_zone_code>
+<horz_collect_method_code></horz_collect_method_code>
+<Station></Station>
+<Centerline_Offset></Centerline_Offset>
+<Offset_Direction></Offset_Direction>
+<Latitude><![CDATA[29° 41' 15.4" N]]></Latitude>
+<Longitude><![CDATA[91° 11' 39.3" W]]></Longitude>
+</LOCATION>
+<LOCATION>
+<PointID>B-05</PointID>
+<elev_datum_code></elev_datum_code>
+<elev_collect_method_code></elev_collect_method_code>
+<horz_datum_code>NAD83 (feet)</horz_datum_code>
+<coord_type_code></coord_type_code>
+<coord_region_code></coord_region_code>
+<coord_zone_code></coord_zone_code>
+<horz_collect_method_code></horz_collect_method_code>
+<Station></Station>
+<Centerline_Offset></Centerline_Offset>
+<Offset_Direction></Offset_Direction>
+<Latitude><![CDATA[29° 41' 22.7" N]]></Latitude>
+<Longitude><![CDATA[91° 11' 38.7" W]]></Longitude>
+</LOCATION>
+<LOCATION>
+<PointID>B-06</PointID>
+<elev_datum_code></elev_datum_code>
+<elev_collect_method_code></elev_collect_method_code>
+<horz_datum_code>NAD83 (feet)</horz_datum_code>
+<coord_type_code></coord_type_code>
+<coord_region_code></coord_region_code>
+<coord_zone_code></coord_zone_code>
+<horz_collect_method_code></horz_collect_method_code>
+<Station></Station>
+<Centerline_Offset></Centerline_Offset>
+<Offset_Direction></Offset_Direction>
+<Latitude><![CDATA[29° 41' 26.1" N]]></Latitude>
+<Longitude><![CDATA[91° 11' 36.4" W]]></Longitude>
+</LOCATION>
+<LOCATION>
+<PointID>B-07</PointID>
+<elev_datum_code></elev_datum_code>
+<elev_collect_method_code></elev_collect_method_code>
+<horz_datum_code>NAD83 (feet)</horz_datum_code>
+<coord_type_code></coord_type_code>
+<coord_region_code></coord_region_code>
+<coord_zone_code></coord_zone_code>
+<horz_collect_method_code></horz_collect_method_code>
+<Station></Station>
+<Centerline_Offset></Centerline_Offset>
+<Offset_Direction></Offset_Direction>
+<Latitude><![CDATA[29° 40' 31.1" N]]></Latitude>
+<Longitude><![CDATA[91° 11' 58.1" W]]></Longitude>
+</LOCATION>
+</dataroot>
