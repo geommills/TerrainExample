@@ -17,7 +17,6 @@
       var container, stats;
       var camera, controls, scene, renderer;
       var mesh, texture;
-      var verticalExaggeration = 1;
 
       console.log(this.terrain.attributes.width);
       console.log(this.terrain.attributes.height);
@@ -110,7 +109,7 @@
         
         var geometry = new THREE.Geometry();
         for ( var i = 0, l = pipeVertices.length; i < l; i ++ ) {  
-          geometry.vertices.push( new THREE.Vector3( pipeVertices[i].x - firstX + 1 - offsetWidth, pipeVertices[i].y - firstY + 1 - offsetHeight,  pipeVertices[i].z - terrainMin) );
+          geometry.vertices.push( new THREE.Vector3( pipeVertices[i].x - firstX + 1 - offsetWidth, pipeVertices[i].y - firstY + 1 - offsetHeight,  (pipeVertices[i].z - terrainMin) * terrainExaggeration ));
         }
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 
