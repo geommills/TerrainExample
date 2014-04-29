@@ -9,9 +9,7 @@
     drawCylinder: function(vstart, vend){
       var HALF_PI = +Math.PI * .5;
       var distance = vstart.distanceTo(vend);
-      var position1  = vend.clone();
-      var position2 = position1.add(vstart);
-      var position = position2.divideScalar(2);
+      var position  = vstart.clone().add(vend).divideScalar(2);
       var material = new THREE.MeshLambertMaterial({color:0x444444});
       var cylinder = new THREE.CylinderGeometry(10,10,distance,10,10,false);
 
@@ -20,8 +18,8 @@
       var offsetPosition = new THREE.Matrix4();//a matrix to fix pivot position
 
 
-      orientation.lookAt(vstart,vend,new THREE.Vector3(0,1,0));//look at destination
-      offsetRotation.makeRotationX( - Math.PI / 2 );//rotate 90 degs on X
+      orientation.lookAt(vstart, vend,new THREE.Vector3(0,1,0));//look at destination
+      offsetRotation.makeRotationX( - HALF_PI );//rotate 90 degs on X    
       orientation.multiply(offsetRotation);//combine orientation with rotation transformations
       cylinder.applyMatrix(orientation);
 
@@ -63,7 +61,7 @@
       var ydiff = this.terrain.attributes.ydiff;
       var firstX = this.terrain.attributes.minx;
       var firstY = this.terrain.attributes.miny;
-      var terrainExaggeration = 1;
+      var terrainExaggeration = 3;
       init();
       animate();
 
@@ -133,21 +131,21 @@
         
         var geometry = new THREE.Geometry();
 
-        var previousVector;
         for ( var i = 0, l = pipeVertices.length; i < l; i ++ ) {  
-          
-          var currentVector = new THREE.Vector3( pipeVertices[i].x - firstX + 1 - offsetWidth,  (pipeVertices[i].z - terrainMin) * terrainExaggeration, pipeVertices[i].y - firstY + 1 - offsetHeight);
-          if(previousVector !== undefined)
+          geometry.vertices.push( new THREE.Vector3( pipeVertices[i].x - firstX + 1 - offsetWidth, pipeVertices[i].y - firstY + 1 - offsetHeight,  (pipeVertices[i].z - terrainMin) * terrainExaggeration ));
+        }  
+        geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+        _.each(geometry.vertices, function(vector){
+          if(dc.previousVector !== undefined)
           {
-            var cylinder = dc.drawCylinder(previousVector, currentVector);
+            var cylinder = dc.drawCylinder(dc.previousVector, vector);
             scene.add( cylinder );
           }
-          previousVector = currentVector;
-        }
-        //geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+          dc.previousVector = vector;
+        });
 
-        //var line = new THREE.Line( geometry, linematerial );
-        //scene.add( line );
+        var line = new THREE.Line( geometry, linematerial );
+        scene.add( line );
 
 
 
