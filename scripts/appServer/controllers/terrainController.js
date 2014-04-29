@@ -141,7 +141,7 @@ exports.getBorings = function(req, res, next){
 						borings[count].y = parseFloat(location.Latitude[0]);
 						count ++;
 					});
-					res.send(borings);
+					res.send({borings: borings});
 					return next();
 				});
 			});

@@ -5,6 +5,7 @@
     initialize: function (options) {
       this.terrain = options.terrainCollection.models[0];
       this.pipe = options.pipeCollection.models[0];
+      this.boringdata = options.boringCollection.models[0];
     },
     drawCylinder: function(vstart, vend){
       var HALF_PI = +Math.PI * .5;
@@ -54,6 +55,7 @@
       var terrainHeight = this.terrain.attributes.height;
       var terrainVertices = this.terrain.attributes.vertices;
       var pipeVertices = this.pipe.attributes.vertices;
+      var borings = this.boringdata.attributes.borings;
       var terrainMin = this.terrain.attributes.minz;
       var offsetWidth = terrainWidth / 2;
       var offsetHeight = terrainHeight / 2;
@@ -139,10 +141,36 @@
           dc.previousVector = vector;
         });
 
+        //Add the borings
 
-        //var linematerial = new THREE.LineBasicMaterial( { color: 0x444488, opacity: 1, linewidth: 5, vertexColors: THREE.VertexColors });
-        //var line = new THREE.Line( geometry, linematerial );
-        //scene.add( line );
+        for ( var i = 0, l = borings.length; i < l; i ++ ) {
+          var geometry = new THREE.Geometry();
+          dc.previousBoringVector = null;
+          var zOff = 0;
+          //get the z at the surface
+          boringX = borings[i].x - firstX + 1;
+          boringY = borings[i].y - firstY + 1;
+          console.log(boringX);
+          for ( var p = 0, t = terrainVertices.length; p < t; p ++ ) {
+            if( boringX == terrainVertices[ p ].x  &&  boringY == terrainVertices[ p ].y)
+            {
+              zOff = terrainVertices[ p ].z - terrainMin;
+            }
+          }
+          console.log(zOff);
+          for ( var j = 0, k = borings[i].depths.length; j < k; j ++ ) { 
+            geometry.vertices.push( new THREE.Vector3( boringX - offsetWidth, boringY -  offsetHeight,  (zOff - borings[i].depths[j].depth) * terrainExaggeration ));
+          }
+          geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+          _.each(geometry.vertices, function(vector){
+              if(dc.previousBoringVector !== null)
+              {
+                var cylinder = dc.drawCylinder(dc.previousBoringVector, vector);
+                scene.add( cylinder );
+              }
+              dc.previousBoringVector = vector;
+          });
+        } 
 
 
 

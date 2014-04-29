@@ -17,3 +17,13 @@ var PipeCollection = Backbone.Collection.extend({
     url: MainApplication.hostURL + '/pipe3d',
     model: PipeModel
 });
+
+var BoringModel = Backbone.Model.extend({
+	url: function() { return MainApplication.hostURL + '/borings3d' },
+    idAttribute: 'Id'
+});
+
+var BoringCollection = Backbone.Collection.extend({
+    url: MainApplication.hostURL + '/borings3d',
+    model: BoringModel
+});
