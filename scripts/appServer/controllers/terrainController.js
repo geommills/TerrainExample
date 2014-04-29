@@ -1,8 +1,11 @@
 var http = require("http");
+var _ = require('lodash');
 var request = require('request');
 var fs = require("fs");
+var when = require("when");
+    xml2js = require('xml2js');
 var data = [];
-exports.get = function(req, res, next){
+exports.getSurface = function(req, res, next){
     
 	fs.readFile('./projects/SurfaceTest/I-5_SurfaceTest.xyz', 'utf8', function (err,dataset) {
 	  	if (err) {
@@ -80,7 +83,7 @@ exports.get = function(req, res, next){
 };
 
 
-exports.getpipe = function(req, res, next){
+exports.getPipe = function(req, res, next){
 	fs.readFile('./projects/SurfaceTest/DrillProfile.txt', 'utf8', function (err2,drilldata) {
 	  	if (err2) {
 	    	console.log(err2);
@@ -104,4 +107,64 @@ exports.getpipe = function(req, res, next){
 	 });
 };
 
+exports.getBorings = function(req, res, next){
+	var borings = [];
+	exports.getfile('./projects/SurfaceTest/sample.xml') 
+	.then(function (boringsxml)
+	{
+		return exports.xmlJson(boringsxml)
+		.then(function (boringsJSON)
+		{
+			var previousID = "";
+			var depths = [];
+			var previousDepth = 0;
+			_.each(boringsJSON.dataroot.SAMPLE, function(sample)
+			{
+				if(previousID !== "" && previousID !== sample.PointID[0])
+				{	
+					borings.push({SampleID: previousID, x: 0, y: 0, depths: depths});
+					depths = [];
+				}
+				depths.push({depth: parseFloat(sample.Depth[0])});
+				previousID = sample.PointID[0];
+			});
+			borings.push({SampleID: previousID, x: 0, y: 0, depths: depths});
+			return exports.getfile('./projects/SurfaceTest/location.xml') 
+			.then(function (locationsxml)
+			{
+				return exports.xmlJson(locationsxml)
+				.then(function (locationsJSON)
+				{
+					var count =0;
+					_.each(locationsJSON.dataroot.LOCATION, function(location){
+						borings[count].x = parseFloat(location.Longitude[0]);
+						borings[count].y = parseFloat(location.Latitude[0]);
+						count ++;
+					});
+					res.send(borings);
+					return next();
+				});
+			});
+
+		});
+	});
+
+};
+
+exports.getfile = function(file){
+	var d = when.defer();
+	fs.readFile(file, 'utf8', function (err2,drilldata) {		
+		d.resolve(drilldata);
+	});
+	return d.promise;
+}
+
+exports.xmlJson = function(xml){
+	var d = when.defer();
+	var parser = new xml2js.Parser();
+	parser.parseString(xml, function (err, result) {
+        d.resolve(result);
+    });
+	return d.promise;
+}
 

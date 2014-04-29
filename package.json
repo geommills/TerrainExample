@@ -23,7 +23,8 @@
     "when": "*",
     "should": "*",
     "change-case": "*",
-    "node-schedule": "*"
+    "node-schedule": "*",
+    "xml2js": "*"
   },
   "devDependencies": {
     "jasmine-node"    :  "*"

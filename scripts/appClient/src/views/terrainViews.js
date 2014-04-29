@@ -61,7 +61,7 @@
       var ydiff = this.terrain.attributes.ydiff;
       var firstX = this.terrain.attributes.minx;
       var firstY = this.terrain.attributes.miny;
-      var terrainExaggeration = 3;
+      var terrainExaggeration = 1;
       init();
       animate();
 
@@ -122,15 +122,10 @@
         scene.add( mesh );
         scene.add( mesh2 );
 
-        var geometry = new THREE.CylinderGeometry( 0, 20, 100, 3 );
-        geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 50, 0 ) );
-        geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
 
+        // Add the pipe
 
-        var linematerial = new THREE.LineBasicMaterial( { color: 0x444488, opacity: 1, linewidth: 5, vertexColors: THREE.VertexColors });
-        
         var geometry = new THREE.Geometry();
-
         for ( var i = 0, l = pipeVertices.length; i < l; i ++ ) {  
           geometry.vertices.push( new THREE.Vector3( pipeVertices[i].x - firstX + 1 - offsetWidth, pipeVertices[i].y - firstY + 1 - offsetHeight,  (pipeVertices[i].z - terrainMin) * terrainExaggeration ));
         }  
@@ -144,8 +139,10 @@
           dc.previousVector = vector;
         });
 
-        var line = new THREE.Line( geometry, linematerial );
-        scene.add( line );
+
+        //var linematerial = new THREE.LineBasicMaterial( { color: 0x444488, opacity: 1, linewidth: 5, vertexColors: THREE.VertexColors });
+        //var line = new THREE.Line( geometry, linematerial );
+        //scene.add( line );
 
 
 
