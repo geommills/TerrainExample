@@ -135,160 +135,206 @@
         
         _.each(geometry.vertices, function(vector){
           if(dc.previousVector !== undefined)
-          { 
-            var cylinder = dc.drawCylinder(dc.previousVector, vector, 0x004040, 7);
+          {
+            var cylinder = dc.drawCylinder(dc.previousVector, vector, "#555555", 7);
             scene.add( cylinder );
           }
           dc.previousVector = vector;
         });
         var colors = [{
-          color: "#ff0000"
-        },{
-          color: "#dd11ff"
+          color: "#111111"
         },
         {
-          color: "#cc00dd"
+          color: "#222222"
         },
         {
-          color: "#bb33ff"
+          color: "#333333"
         },
         {
-          color: "#aa55ff"
+          color: "#444444"
         },
         {
-          color: "#a23564"
+          color: "#555555"
         },
         {
-          color: "#25b45a"
+          color: "#666666"
         },
         {
-          color: "#385689"
+          color: "#777777"
         },
         {
-          color: "#967965"
+          color: "#888888"
         },
         {
-          color: "#205796"
+          color: "#999999"
         },
         {
-          color: "#9ad456"
+          color: "#aaaaaa"
         },
         {
-          color: "#94d2a4"
+          color: "#bbbbbb"
         },
         {
-          color: "#7a37f3"
+          color: "#cccccc"
         },
         {
-          color: "#5f34a1"
+          color: "#dddddd"
         },
         {
-          color: "#3f5895"
+          color: "#111111"
         },
         {
-          color: "#d4f568"
+          color: "#222222"
         },
         {
-          color: "#b68906"
+          color: "#333333"
         },
         {
-          color: "#096987"
+          color: "#444444"
         },
         {
-          color: "#ad3567"
+          color: "#555555"
         },
         {
-          color: "#79d4f3"
+          color: "#666666"
         },
         {
-          color: "#64df45"
+          color: "#777777"
         },
         {
-          color: "#801345"
+          color: "#888888"
         },
         {
-          color: "#9703fd"
+          color: "#999999"
         },
         {
-          color: "#a34866"
+          color: "#aaaaaa"
         },
         {
-          color: "#b46987"
+          color: "#bbbbbb"
         },
         {
-          color: "#ff3399"
+          color: "#cccccc"
         },
         {
-          color: "#ff3399"
+          color: "#dddddd"
         },
         {
-          color: "#ff3399"
+          color: "#111111"
         },
         {
-          color: "#ff3399"
+          color: "#222222"
         },
         {
-          color: "#ff3399"
+          color: "#333333"
         },
         {
-          color: "#ff3399"
+          color: "#444444"
         },
         {
-          color: "#ff3399"
+          color: "#555555"
         },
         {
-          color: "#ff3399"
+          color: "#666666"
         },
         {
-          color: "#ff3399"
+          color: "#777777"
         },
         {
-          color: "#ff3399"
+          color: "#888888"
         },
         {
-          color: "#ff3399"
+          color: "#999999"
         },
         {
-          color: "#ff3399"
+          color: "#aaaaaa"
         },
         {
-          color: "#ff3399"
+          color: "#bbbbbb"
         },
         {
-          color: "#ff3399"
+          color: "#cccccc"
         },
         {
-          color: "#ff3399"
+          color: "#dddddd"
         },
         {
-          color: "#ff3399"
+          color: "#111111"
         },
         {
-          color: "#ff3399"
+          color: "#222222"
         },
         {
-          color: "#ff3399"
+          color: "#333333"
         },
         {
-          color: "#ff3399"
+          color: "#444444"
         },
         {
-          color: "#ff3399"
+          color: "#555555"
         },
         {
-          color: "#ff3399"
+          color: "#666666"
         },
         {
-          color: "#ff3399"
+          color: "#777777"
         },
         {
-          color: "#ff3399"
+          color: "#888888"
         },
         {
-          color: "#ff3399"
+          color: "#999999"
         },
         {
-          color: "#ff3399"
+          color: "#aaaaaa"
+        },
+        {
+          color: "#bbbbbb"
+        },
+        {
+          color: "#cccccc"
+        },
+        {
+          color: "#dddddd"
+        },
+        {
+          color: "#111111"
+        },
+        {
+          color: "#222222"
+        },
+        {
+          color: "#333333"
+        },
+        {
+          color: "#444444"
+        },
+        {
+          color: "#555555"
+        },
+        {
+          color: "#666666"
+        },
+        {
+          color: "#777777"
+        },
+        {
+          color: "#888888"
+        },
+        {
+          color: "#999999"
+        },
+        {
+          color: "#aaaaaa"
+        },
+        {
+          color: "#bbbbbb"
+        },
+        {
+          color: "#cccccc"
+        },
+        {
+          color: "#dddddd"
         }];
 
         //Add the borings
