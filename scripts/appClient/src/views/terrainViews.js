@@ -7,26 +7,26 @@
       this.pipe = options.pipeCollection.models[0];
       this.boringdata = options.boringCollection.models[0];
     },
-    drawCylinder: function(vstart, vend){
+    drawCylinder: function(vstart, vend, color, rad){
       var HALF_PI = +Math.PI * .5;
       var distance = vstart.distanceTo(vend);
       var position  = vstart.clone().add(vend).divideScalar(2);
-      var material = new THREE.MeshLambertMaterial({color:0x444444});
-      var cylinder = new THREE.CylinderGeometry(10,10,distance,10,10,false);
+      var cylinder = new THREE.CylinderGeometry(rad,rad,distance,rad,rad,false);
 
       var orientation = new THREE.Matrix4();//a new orientation matrix to offset pivot
       var offsetRotation = new THREE.Matrix4();//a matrix to fix pivot rotation
       var offsetPosition = new THREE.Matrix4();//a matrix to fix pivot position
 
+      var material = new THREE.MeshBasicMaterial({color:color});
 
-      orientation.lookAt(vstart, vend,new THREE.Vector3(0,1,0));//look at destination
+      orientation.lookAt(vstart, vend, new THREE.Vector3(0,1,0));//look at destination
       offsetRotation.makeRotationX( - HALF_PI );//rotate 90 degs on X    
       orientation.multiply(offsetRotation);//combine orientation with rotation transformations
       cylinder.applyMatrix(orientation);
 
-      var mesh = new THREE.Mesh(cylinder,material);
-      mesh.position=position;
-      return mesh;
+      var mesh2 = new THREE.Mesh(cylinder,material);
+      mesh2.position=position;
+      return mesh2;
     },
     onShow: function()
     {
@@ -132,14 +132,164 @@
           geometry.vertices.push( new THREE.Vector3( pipeVertices[i].x - firstX + 1 - offsetWidth, pipeVertices[i].y - firstY + 1 - offsetHeight,  (pipeVertices[i].z - terrainMin) * terrainExaggeration ));
         }  
         geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+        
         _.each(geometry.vertices, function(vector){
           if(dc.previousVector !== undefined)
-          {
-            var cylinder = dc.drawCylinder(dc.previousVector, vector);
+          { 
+            var cylinder = dc.drawCylinder(dc.previousVector, vector, 0x004040, 7);
             scene.add( cylinder );
           }
           dc.previousVector = vector;
         });
+        var colors = [{
+          color: "#ff0000"
+        },{
+          color: "#dd11ff"
+        },
+        {
+          color: "#cc00dd"
+        },
+        {
+          color: "#bb33ff"
+        },
+        {
+          color: "#aa55ff"
+        },
+        {
+          color: "#a23564"
+        },
+        {
+          color: "#25b45a"
+        },
+        {
+          color: "#385689"
+        },
+        {
+          color: "#967965"
+        },
+        {
+          color: "#205796"
+        },
+        {
+          color: "#9ad456"
+        },
+        {
+          color: "#94d2a4"
+        },
+        {
+          color: "#7a37f3"
+        },
+        {
+          color: "#5f34a1"
+        },
+        {
+          color: "#3f5895"
+        },
+        {
+          color: "#d4f568"
+        },
+        {
+          color: "#b68906"
+        },
+        {
+          color: "#096987"
+        },
+        {
+          color: "#ad3567"
+        },
+        {
+          color: "#79d4f3"
+        },
+        {
+          color: "#64df45"
+        },
+        {
+          color: "#801345"
+        },
+        {
+          color: "#9703fd"
+        },
+        {
+          color: "#a34866"
+        },
+        {
+          color: "#b46987"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        },
+        {
+          color: "#ff3399"
+        }];
 
         //Add the borings
 
@@ -157,16 +307,17 @@
               zOff = terrainVertices[ p ].z - terrainMin;
             }
           }
-          console.log(zOff);
           for ( var j = 0, k = borings[i].depths.length; j < k; j ++ ) { 
             geometry.vertices.push( new THREE.Vector3( boringX - offsetWidth, boringY -  offsetHeight,  (zOff - borings[i].depths[j].depth) * terrainExaggeration ));
           }
           geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+          var vertCount = 0;
           _.each(geometry.vertices, function(vector){
               if(dc.previousBoringVector !== null)
               {
-                var cylinder = dc.drawCylinder(dc.previousBoringVector, vector);
+                var cylinder = dc.drawCylinder(dc.previousBoringVector, vector,colors[vertCount].color, 5);
                 scene.add( cylinder );
+                vertCount += 1;
               }
               dc.previousBoringVector = vector;
           });
